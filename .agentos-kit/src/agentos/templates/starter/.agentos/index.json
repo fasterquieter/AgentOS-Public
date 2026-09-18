@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "project": "{{PROJECT_NAME}}",
+  "documents": [
+    {
+      "id": "project",
+      "path": ".agentos/project.md",
+      "title": "Project definition",
+      "type": "project",
+      "authority": "working",
+      "status": "draft",
+      "change_control": "agent",
+      "always": true,
+      "fallback": true,
+      "tags": [
+        "product",
+        "scope",
+        "stack"
+      ],
+      "read_when": [
+        "starting any non-trivial task",
+        "checking project scope"
+      ],
+      "paths": [],
+      "depends_on": [],
+      "review_after": "{{DATE}}",
+      "max_tokens": 800
+    },
+    {
+      "id": "state",
+      "path": ".agentos/state.md",
+      "title": "Current project state",
+      "type": "state",
+      "authority": "working",
+      "status": "active",
+      "change_control": "agent",
+      "always": true,
+      "fallback": true,
+      "tags": [
+        "status",
+        "current",
+        "next",
+        "handoff"
+      ],
+      "read_when": [
+        "starting substantial work",
+        "resuming work"
+      ],
+      "paths": [],
+      "depends_on": [
+        "project"
+      ],
+      "review_after": "{{DATE}}",
+      "max_tokens": 700
+    },
+    {
+      "id": "architecture",
+      "path": ".agentos/architecture.md",
+      "title": "Architecture map",
+      "type": "architecture",
+      "authority": "working",
+      "status": "draft",
+      "change_control": "agent",
+      "fallback": true,
+      "tags": [
+        "architecture",
+        "data-flow",
+        "components",
+        "dependencies"
+      ],
+      "read_when": [
+        "changing boundaries or cross-component behavior"
+      ],
+      "paths": [],
+      "depends_on": [
+        "project"
+      ],
+      "review_after": "{{DATE}}",
+      "max_tokens": 1200
+    },
+    {
+      "id": "invariants",
+      "path": ".agentos/invariants.md",
+      "title": "System invariants",
+      "type": "invariants",
+      "authority": "contract",
+      "status": "draft",
+      "change_control": "review",
+      "tags": [
+        "must",
+        "safety",
+        "compatibility",
+        "data"
+      ],
+      "read_when": [
+        "changing data, compatibility, security, or core behavior"
+      ],
+      "paths": [],
+      "depends_on": [
+        "project"
+      ],
+      "review_after": "{{DATE}}",
+      "max_tokens": 700
+    },
+    {
+      "id": "questions",
+      "path": ".agentos/questions.md",
+      "title": "Open questions",
+      "type": "questions",
+      "authority": "working",
+      "status": "active",
+      "change_control": "agent",
+      "tags": [
+        "unknown",
+        "question",
+        "uncertainty"
+      ],
+      "read_when": [
+        "encountering ambiguity or making a product decision"
+      ],
+      "paths": [],
+      "depends_on": [
+        "project"
+      ],
+      "review_after": "{{DATE}}",
+      "max_tokens": 700
+    }
+  ]
+}

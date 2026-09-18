@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "project": "{{PROJECT_NAME}}",
+  "documents": [
+    {
+      "id": "project",
+      "path": ".agentos/project.md",
+      "title": "{{PROJECT_NAME}} project definition",
+      "type": "project",
+      "authority": "contract",
+      "status": "active",
+      "change_control": "review",
+      "always": true,
+      "fallback": true,
+      "priority": 1,
+      "tags": ["product", "scope", "users", "non-goals"],
+      "read_when": ["starting non-trivial work", "checking product scope"],
+      "paths": ["README.md"],
+      "depends_on": [],
+      "review_after": "{{DATE}}",
+      "max_tokens": 900
+    },
+    {
+      "id": "state",
+      "path": ".agentos/state.md",
+      "title": "Current {{PROJECT_NAME}} state",
+      "type": "state",
+      "authority": "working",
+      "status": "active",
+      "change_control": "agent",
+      "always": true,
+      "fallback": true,
+      "priority": 2,
+      "tags": ["current", "status", "next", "handoff"],
+      "read_when": ["starting or resuming work"],
+      "paths": [],
+      "depends_on": ["project"],
+      "review_after": "{{DATE}}",
+      "max_tokens": 700
+    },
+    {
+      "id": "capability-map",
+      "path": ".agentos-kit/CAPABILITIES.md",
+      "title": "Dormant AgentOS capability map",
+      "type": "capability-map",
+      "authority": "working",
+      "status": "active",
+      "tags": ["agentos", "capability", "dormant", "activation", "parallel", "multi-agent", "governance", "ownership", "routing-evaluation"],
+      "read_when": ["discovering whether AgentOS has a dormant capability for a new project need"],
+      "paths": [],
+      "depends_on": [],
+      "max_tokens": 1200
+    },
+    {
+      "id": "seed-origin",
+      "path": ".agentos/seed-state.md",
+      "title": "AgentOS seed origin",
+      "type": "origin",
+      "authority": "historical",
+      "status": "archived",
+      "change_control": "protected",
+      "tags": ["agentos", "seed", "origin"],
+      "read_when": ["investigating the repository's AgentOS origin"],
+      "paths": [],
+      "depends_on": [],
+      "max_tokens": 400
+    },
+    {
+      "id": "capability-library",
+      "path": ".agentos-kit/README.md",
+      "title": "Dormant AgentOS capability library",
+      "type": "capability-library",
+      "authority": "working",
+      "status": "dormant",
+      "change_control": "protected",
+      "tags": ["agentos", "capability", "dormant", "guidance", "reviews", "tooling"],
+      "read_when": ["maintaining the dormant capability library itself"],
+      "paths": [],
+      "depends_on": [],
+      "max_tokens": 2600
+    }
+  ]
+}

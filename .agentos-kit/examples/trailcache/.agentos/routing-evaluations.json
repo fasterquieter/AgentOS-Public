@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "noise-2026-08-26-journal-ui-loaded-sync",
+      "origin": "The first continuity simulation loaded synchronization memory for a journal empty-state task because one generic word outweighed a conflicting source path.",
+      "task": "change the journal list empty-state copy",
+      "paths": [
+        "src/journal/EntryList.tsx"
+      ],
+      "budget": 2000,
+      "expect_selected": [
+        "project",
+        "state",
+        "feedback-0042",
+        "insight-hidden-saved-entry"
+      ],
+      "expect_absent": [
+        "sync",
+        "decision-0001",
+        "failed-0001",
+        "plan-0007"
+      ]
+    }
+  ]
+}

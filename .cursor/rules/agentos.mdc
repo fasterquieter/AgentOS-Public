@@ -1,0 +1,6 @@
+---
+description: Load the canonical project agent router
+alwaysApply: true
+---
+
+Follow @AGENTS.md. Treat `.agentos/index.json` as the canonical context catalog.

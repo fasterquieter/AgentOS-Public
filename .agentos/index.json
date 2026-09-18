@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "project": "AgentOS",
+  "documents": [
+    {
+      "id": "project",
+      "path": ".agentos/project.md",
+      "title": "AgentOS project definition",
+      "type": "project",
+      "authority": "contract",
+      "status": "active",
+      "change_control": "review",
+      "always": true,
+      "fallback": true,
+      "priority": 1,
+      "tags": [
+        "product",
+        "scope",
+        "users",
+        "non-goals"
+      ],
+      "read_when": [
+        "starting non-trivial work",
+        "checking product scope"
+      ],
+      "paths": [
+        "README.md"
+      ],
+      "depends_on": [],
+      "review_after": "2026-11-26",
+      "max_tokens": 900
+    },
+    {
+      "id": "state",
+      "path": ".agentos/state.md",
+      "title": "Current AgentOS state",
+      "type": "state",
+      "authority": "working",
+      "status": "active",
+      "change_control": "agent",
+      "always": true,
+      "fallback": true,
+      "priority": 2,
+      "tags": [
+        "current",
+        "status",
+        "next",
+        "handoff"
+      ],
+      "read_when": [
+        "starting or resuming work"
+      ],
+      "paths": [],
+      "depends_on": [
+        "project"
+      ],
+      "review_after": "2026-10-10",
+      "max_tokens": 700
+    },
+    {
+      "id": "architecture",
+      "path": ".agentos/architecture.md",
+      "title": "AgentOS architecture",
+      "type": "architecture",
+      "authority": "evidence",
+      "status": "active",
+      "change_control": "agent",
+      "tags": [
+        "architecture",
+        "cli",
+        "catalog",
+        "routing",
+        "bootstrap",
+        "validation",
+        "behavior",
+        "proof",
+        "evidence"
+      ],
+      "read_when": [
+        "changing CLI behavior, metadata, routing, initialization, validation, or behavior proof maps"
+      ],
+      "paths": [
+        ".agentos-kit/src/**",
+        ".agentos-kit/docs/**",
+        ".agentos-kit/reviews/**"
+      ],
+      "depends_on": [
+        "project",
+        "invariants",
+        "decision-0001"
+      ],
+      "review_after": "2026-11-26",
+      "max_tokens": 1400
+    },
+    {
+      "id": "invariants",
+      "path": ".agentos/invariants.md",
+      "title": "AgentOS invariants",
+      "type": "invariants",
+      "authority": "contract",
+      "status": "active",
+      "change_control": "review",
+      "tags": [
+        "must",
+        "compatibility",
+        "safety",
+        "token-economy"
+      ],
+      "read_when": [
+        "changing any framework behavior",
+        "reviewing a release"
+      ],
+      "paths": [
+        ".agentos-kit/src/**",
+        ".agentos-kit/reviews/**"
+      ],
+      "depends_on": [
+        "project"
+      ],
+      "review_after": "2026-11-26",
+      "max_tokens": 850
+    },
+    {
+      "id": "decision-0001",
+      "path": ".agentos/decisions/0001-json-catalog-not-generated-summaries.md",
+      "title": "Use a JSON catalog and source documents",
+      "type": "decision",
+      "authority": "decision",
+      "status": "active",
+      "change_control": "review",
+      "tags": [
+        "catalog",
+        "json",
+        "retrieval",
+        "knowledge-graph",
+        "generation"
+      ],
+      "read_when": [
+        "replacing the catalog, adding generated summaries, or proposing vector retrieval"
+      ],
+      "paths": [
+        ".agentos-kit/src/agentos/catalog.py",
+        ".agentos/index.json"
+      ],
+      "depends_on": [
+        "invariants"
+      ],
+      "review_after": "2027-02-26",
+      "max_tokens": 850
+    },
+    {
+      "id": "seed-state",
+      "path": ".agentos/seed-state.md",
+      "title": "Repository identity and seed state",
+      "type": "seed-state",
+      "authority": "contract",
+      "status": "active",
+      "tags": [
+        "seed",
+        "clone",
+        "identity",
+        "adaptation",
+        "first-project"
+      ],
+      "read_when": [
+        "deciding whether this checkout is AgentOS master work or a new project seed"
+      ],
+      "paths": [
+        "AGENTS.md",
+        ".agentos-kit/ADAPTATION.md"
+      ],
+      "depends_on": [],
+      "review_after": "2027-02-26",
+      "max_tokens": 700
+    },
+    {
+      "id": "capability-map",
+      "path": ".agentos-kit/CAPABILITIES.md",
+      "title": "Dormant AgentOS capability map",
+      "type": "capability-map",
+      "authority": "working",
+      "status": "active",
+      "tags": [
+        "agentos",
+        "capability",
+        "dormant",
+        "activation",
+        "parallel",
+        "multi-agent",
+        "governance",
+        "ownership",
+        "routing-evaluation"
+      ],
+      "read_when": [
+        "discovering whether AgentOS has a dormant capability for a new project need"
+      ],
+      "paths": [],
+      "depends_on": [],
+      "review_after": "2027-02-26",
+      "max_tokens": 1200
+    },
+    {
+      "id": "decision-0002",
+      "path": ".agentos/decisions/0002-use-complete-dormant-kit-with-first-prompt-adaptation.md",
+      "title": "Use complete dormant kit with first-prompt adaptation",
+      "type": "decision",
+      "authority": "decision",
+      "status": "active",
+      "change_control": "review",
+      "tags": [
+        "seed",
+        "bootstrap",
+        "dormant",
+        "architecture"
+      ],
+      "read_when": [
+        "changing clone-as-seed identity, adaptation, or capability lifecycle"
+      ],
+      "paths": [],
+      "depends_on": [
+        "project"
+      ],
+      "review_after": "2026-09-25",
+      "max_tokens": 1800
+    },
+    {
+      "id": "decision-0003",
+      "path": ".agentos/decisions/0003-add-deterministic-safety-rails-without-orchestration.md",
+      "title": "Add deterministic safety rails without orchestration",
+      "type": "decision",
+      "authority": "decision",
+      "status": "active",
+      "change_control": "review",
+      "tags": [
+        "adaptation",
+        "governance",
+        "collaboration",
+        "routing",
+        "positioning"
+      ],
+      "read_when": [
+        "changing adaptation previews, memory governance, parallel reconciliation, or routing evaluations"
+      ],
+      "paths": [
+        ".agentos-kit/ADAPTATION.md",
+        ".agentos-kit/src/agentos/adaptation.py",
+        ".agentos-kit/src/agentos/routing_eval.py",
+        ".agentos-kit/docs/governance.md",
+        ".agentos-kit/docs/collaboration.md"
+      ],
+      "depends_on": [
+        "project",
+        "invariants",
+        "decision-0001",
+        "decision-0002"
+      ],
+      "review_after": "2027-03-10",
+      "max_tokens": 1200
+    }
+  ]
+}

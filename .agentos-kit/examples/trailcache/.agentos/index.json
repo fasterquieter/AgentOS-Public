@@ -1,0 +1,350 @@
+{
+  "schema_version": 1,
+  "project": "TrailCache",
+  "documents": [
+    {
+      "id": "project",
+      "path": ".agentos/project.md",
+      "title": "TrailCache product definition",
+      "type": "project",
+      "authority": "contract",
+      "status": "active",
+      "always": true,
+      "fallback": true,
+      "priority": 1,
+      "tags": [
+        "product",
+        "scope",
+        "glossary"
+      ],
+      "read_when": [
+        "starting non-trivial TrailCache work"
+      ],
+      "paths": [],
+      "depends_on": [],
+      "review_after": "2026-11-26",
+      "max_tokens": 700
+    },
+    {
+      "id": "state",
+      "path": ".agentos/state.md",
+      "title": "Current TrailCache state",
+      "type": "state",
+      "authority": "working",
+      "status": "active",
+      "always": true,
+      "fallback": true,
+      "priority": 2,
+      "tags": [
+        "current",
+        "status",
+        "next"
+      ],
+      "read_when": [
+        "starting or resuming work"
+      ],
+      "paths": [],
+      "depends_on": [
+        "project"
+      ],
+      "review_after": "2026-12-10",
+      "max_tokens": 550
+    },
+    {
+      "id": "architecture",
+      "path": ".agentos/architecture.md",
+      "title": "TrailCache architecture",
+      "type": "architecture",
+      "authority": "evidence",
+      "status": "active",
+      "tags": [
+        "architecture",
+        "mobile",
+        "storage",
+        "cloud"
+      ],
+      "read_when": [
+        "changing component boundaries, persistence, or cross-cutting data flow"
+      ],
+      "paths": [
+        "src/storage/**",
+        "src/app/**"
+      ],
+      "depends_on": [
+        "invariants",
+        "decision-0001"
+      ],
+      "review_after": "2026-11-26",
+      "max_tokens": 900
+    },
+    {
+      "id": "invariants",
+      "path": ".agentos/invariants.md",
+      "title": "TrailCache invariants",
+      "type": "invariants",
+      "authority": "contract",
+      "status": "active",
+      "tags": [
+        "offline",
+        "data",
+        "compatibility",
+        "idempotent",
+        "must"
+      ],
+      "read_when": [
+        "changing storage, synchronization, migration, deletion, or identity"
+      ],
+      "paths": [
+        "src/sync/**",
+        "src/storage/**",
+        "migrations/**"
+      ],
+      "depends_on": [
+        "project"
+      ],
+      "review_after": "2026-11-26",
+      "max_tokens": 550
+    },
+    {
+      "id": "sync",
+      "path": ".agentos/sync.md",
+      "title": "Photo and journal synchronization",
+      "type": "subsystem",
+      "authority": "evidence",
+      "status": "active",
+      "tags": [
+        "sync",
+        "upload",
+        "photo",
+        "retry",
+        "queue",
+        "conflict",
+        "offline"
+      ],
+      "read_when": [
+        "changing upload queue, retries, conflict resolution, or convergence"
+      ],
+      "paths": [
+        "src/sync/**",
+        "tests/sync/**"
+      ],
+      "depends_on": [
+        "invariants",
+        "decision-0001",
+        "failed-0001"
+      ],
+      "review_after": "2026-10-26",
+      "max_tokens": 950
+    },
+    {
+      "id": "decision-0001",
+      "path": ".agentos/decisions/0001-device-journal-is-authoritative.md",
+      "title": "Device journal remains authoritative",
+      "type": "decision",
+      "authority": "decision",
+      "status": "active",
+      "tags": [
+        "local-first",
+        "source-of-truth",
+        "deletion",
+        "conflict"
+      ],
+      "read_when": [
+        "changing synchronization authority, deletion, or reconciliation"
+      ],
+      "paths": [
+        "src/sync/**",
+        "src/storage/**"
+      ],
+      "depends_on": [
+        "invariants"
+      ],
+      "review_after": "2027-02-26",
+      "max_tokens": 700
+    },
+    {
+      "id": "failed-0001",
+      "path": ".agentos/failed-approaches.md",
+      "title": "Failed synchronization approaches",
+      "type": "failed-approach",
+      "authority": "evidence",
+      "status": "active",
+      "tags": [
+        "failed",
+        "signed-url",
+        "upload",
+        "retry",
+        "background"
+      ],
+      "read_when": [
+        "changing photo upload retry or background transfer implementation"
+      ],
+      "paths": [
+        "src/sync/uploads/**",
+        "src/sync/queue.ts"
+      ],
+      "depends_on": [
+        "decision-0001"
+      ],
+      "review_after": "2026-11-26",
+      "max_tokens": 650
+    },
+    {
+      "id": "plan-0007",
+      "path": ".agentos/plans/0007-resumable-photo-uploads.md",
+      "title": "Make photo uploads resumable",
+      "type": "plan",
+      "authority": "working",
+      "status": "active",
+      "tags": [
+        "photo",
+        "upload",
+        "retry",
+        "resume",
+        "queue"
+      ],
+      "read_when": [
+        "continuing resumable photo upload implementation"
+      ],
+      "paths": [
+        "src/sync/queue.ts",
+        "src/sync/uploads/**",
+        "tests/sync/uploads/**"
+      ],
+      "depends_on": [
+        "sync",
+        "invariants",
+        "decision-0001",
+        "failed-0001"
+      ],
+      "review_after": "2026-12-10",
+      "max_tokens": 900
+    },
+    {
+      "id": "persona-distracted-first-run",
+      "path": ".agentos/personas/distracted-first-run.md",
+      "title": "Distracted first-run hiker",
+      "type": "persona",
+      "authority": "working",
+      "status": "active",
+      "tags": [
+        "persona",
+        "onboarding",
+        "first-run",
+        "filters",
+        "offline"
+      ],
+      "read_when": [
+        "testing onboarding, journal filters, save feedback, or first offline use"
+      ],
+      "paths": [
+        "src/onboarding/**",
+        "src/journal/**"
+      ],
+      "depends_on": [
+        "insight-hidden-saved-entry"
+      ],
+      "review_after": "2026-11-26",
+      "max_tokens": 650
+    },
+    {
+      "id": "persona-screen-reader",
+      "path": ".agentos/personas/screen-reader-navigator.md",
+      "title": "Screen-reader journal navigator",
+      "type": "persona",
+      "authority": "working",
+      "status": "active",
+      "tags": [
+        "persona",
+        "accessibility",
+        "screen-reader",
+        "journal"
+      ],
+      "read_when": [
+        "changing navigation, journal list semantics, or photo controls"
+      ],
+      "paths": [
+        "src/journal/**",
+        "src/navigation/**"
+      ],
+      "depends_on": [
+        "project"
+      ],
+      "review_after": "2026-11-26",
+      "max_tokens": 550
+    },
+    {
+      "id": "feedback-0042",
+      "path": ".agentos/feedback/raw/0042-entry-disappears-after-save.md",
+      "title": "Entry appears to disappear after save",
+      "type": "feedback",
+      "authority": "evidence",
+      "status": "active",
+      "tags": [
+        "feedback",
+        "save",
+        "disappear",
+        "filter",
+        "journal"
+      ],
+      "read_when": [
+        "investigating saved entries missing from the journal list"
+      ],
+      "paths": [
+        "src/journal/**"
+      ],
+      "depends_on": [],
+      "review_after": "2027-08-26",
+      "max_tokens": 450
+    },
+    {
+      "id": "insight-hidden-saved-entry",
+      "path": ".agentos/feedback/insights/hidden-saved-entry.md",
+      "title": "Active filters make successful saves look lost",
+      "type": "feedback-insight",
+      "authority": "evidence",
+      "status": "active",
+      "tags": [
+        "feedback",
+        "filter",
+        "save",
+        "persona",
+        "journal"
+      ],
+      "read_when": [
+        "changing save confirmation, filters, or journal empty states"
+      ],
+      "paths": [
+        "src/journal/**"
+      ],
+      "depends_on": [
+        "feedback-0042"
+      ],
+      "review_after": "2026-10-26",
+      "max_tokens": 600
+    },
+    {
+      "id": "upstream-0003",
+      "path": ".agentos/upstream/0003-negative-path-routing.md",
+      "title": "Allow exclusion paths in routing",
+      "type": "upstream",
+      "authority": "working",
+      "status": "draft",
+      "tags": [
+        "agentos",
+        "routing",
+        "generated",
+        "meta-learning"
+      ],
+      "read_when": [
+        "reviewing AgentOS routing lessons from TrailCache"
+      ],
+      "paths": [],
+      "depends_on": [
+        "sync"
+      ],
+      "review_after": "2026-11-26",
+      "max_tokens": 500
+    }
+  ]
+}
